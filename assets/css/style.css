@@ -1,0 +1,323 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:      #2E7D32;
+  --green-dark: #1B5E20;
+  --white:      #ffffff;
+  --bg:         #F4F7F4;
+  --nav-h:      76px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Onest', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+}
+
+/* ═══════════════════════════
+   NAV
+═══════════════════════════ */
+nav {
+  width: 100%;
+  height: var(--nav-h);
+  background: var(--white);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-block { display: flex; flex-direction: column; line-height: 1; }
+.logo-name {
+  font-family: 'Geologica', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--green); letter-spacing: -0.5px;
+}
+.logo-sub { font-size: 12px; color: #6B7280; margin-top: 3px; }
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-geo {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 14px; color: #4B5563;
+}
+.nav-geo svg { color: var(--green); }
+.nav-phone {
+  font-size: 18px; font-weight: 700; color: #1C2B1E;
+  text-decoration: none; letter-spacing: -0.3px; transition: color 120ms;
+}
+.nav-phone:hover { color: var(--green); }
+.nav-btn {
+  height: 42px; padding: 0 22px;
+  border: 2px solid var(--green); border-radius: 8px;
+  background: transparent; color: var(--green);
+  font-size: 14px; font-weight: 700; font-family: 'Onest', sans-serif;
+  cursor: pointer; transition: all 150ms; white-space: nowrap;
+}
+.nav-btn:hover { background: var(--green); color: var(--white); }
+
+/* ═══════════════════════════
+   HERO
+═══════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  background: url('../images/hero/hero-bg.webp') center/cover no-repeat;
+}
+
+/* Градиент поверх фона — слева темнее для читаемости текста,
+   справа светлее чтобы PNG-объект смотрелся нативно */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.58) 0%,
+    rgba(0,0,0,0.35) 35%,
+    rgba(0,0,0,0.05) 65%,
+    rgba(0,0,0,0.00) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  padding: 64px 6% 64px 8%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* ── ЛЕВАЯ КОЛОНКА — текст ── */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: 'Geologica', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.13;
+  color: var(--white);
+  letter-spacing: -1.2px;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.25);
+}
+h1 em {
+  font-style: normal;
+  color: #81C784;
+}
+
+.hero-sub {
+  font-size: 19px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 28px;
+  font-weight: 400;
+  max-width: 500px;
+}
+
+.bullets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 32px;
+  margin-bottom: 32px;
+}
+.bullet {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.35;
+}
+.bullet svg { color: #81C784; flex-shrink: 0; }
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 62px;
+  padding: 0 44px;
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Onest', sans-serif;
+  cursor: pointer;
+  transition: all 160ms;
+  box-shadow: 0 6px 28px rgba(46,125,50,0.50);
+  align-self: flex-start;
+  white-space: nowrap;
+}
+.cta-btn:hover {
+  background: var(--green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(46,125,50,0.55);
+}
+.cta-btn:active { transform: translateY(0); }
+
+.microcopy {
+  margin-top: 14px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.6;
+}
+.microcopy ul { list-style: none; margin: 4px 0 6px; }
+.microcopy ul li::before { content: "• "; color: #81C784; }
+.microcopy strong { color: rgba(255,255,255,0.80); font-weight: 600; }
+
+.trust-row {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.68);
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.trust-row svg { color: #81C784; flex-shrink: 0; }
+
+/* ── ПРАВАЯ КОЛОНКА — PNG объект без подложки ── */
+.hero-right {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  min-height: 480px;
+  position: relative;
+}
+
+/* Само PNG-изображение погреба/крана — без фона, без рамки */
+.hero-img {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  display: block;
+  /* Лёгкая тень снизу чтобы объект "стоял" на фоне */
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,0.40));
+  /* Объект чуть снизу — как в референсе */
+  margin-bottom: -40px;
+}
+
+/* Заглушка пока нет PNG.
+   Когда будет реальное PNG без фона — заменить <div> на:
+   <img src="assets/images/hero/hero-montage.png"
+        alt="Монтаж погреба краном"
+        class="hero-img">
+*/
+.hero-img-placeholder {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(255,255,255,0.50);
+  font-size: 15px;
+  text-align: center;
+  border: 2px dashed rgba(255,255,255,0.20);
+  border-radius: 16px;
+  padding: 32px;
+}
+.hero-img-placeholder svg { opacity: 0.4; }
+.hero-img-placeholder p { line-height: 1.6; }
+.hero-img-placeholder code {
+  font-size: 12px;
+  opacity: 0.5;
+  background: rgba(255,255,255,0.10);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════
+   MOBILE
+═══════════════════════════ */
+@media (max-width: 960px) {
+  :root { --nav-h: 60px; }
+  .nav-geo { display: none; }
+  .nav-btn { display: none; }
+  .nav-inner { padding: 0 20px; }
+
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.60) 0%,
+      rgba(0,0,0,0.45) 100%
+    );
+  }
+
+  .hero-inner {
+    width: 100%;
+    max-width: 100%;
+    padding: 36px 5% 0;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Порядок: заголовок → PNG → подпись + кнопка */
+  .hero-left { order: 1; }
+  .hero-right { order: 2; min-height: 260px; }
+
+  h1 { font-size: 32px; margin-bottom: 16px; }
+  .hero-sub { font-size: 16px; margin-bottom: 20px; }
+
+  .bullets {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+    margin-bottom: 24px;
+  }
+
+  .cta-btn {
+    width: 100%;
+    align-self: stretch;
+    height: 56px;
+    font-size: 17px;
+  }
+
+  .hero-right {
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .hero-img-placeholder {
+    max-width: 100%;
+    aspect-ratio: 4/3;
+    margin-bottom: 0;
+  }
+}
+

@@ -1,0 +1,86 @@
+ДЛЯ SEO-СПЕЦИАЛИСТА (технического)
+ПРАВИЛА ПО ФАЙЛАМ — соблюдать строго:
+Мета-теги, og-теги, schema.org — только в <head> внутри index.html.
+robots.txt, sitemap.xml, llms.txt — только в корне проекта.
+Не трогать style.css, main.js, send.php — это зоны других специалистов.
+Не трогать папку assets/ — это зона фронтенда.
+Не создавать новых файлов без явной команды.
+─────────────────────────────────────────────────────────────
+ФАЙЛЫ ПОД КАЖДЫЙ ПРОЕКТ:
+1. robots.txt
+   User-agent: *
+   Allow: /
+   Sitemap: https://ваш-домен.ru/sitemap.xml
+2. sitemap.xml
+   — namespace строго: http://www.sitemaps.org/schemas/sitemap/0.9
+   — lastmod обновлять при каждом деплое
+   <?xml version="1.0" encoding="UTF-8"?>
+   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+     <url>
+       <loc>https://ваш-домен.ru/</loc>
+       <lastmod>YYYY-MM-DD</lastmod>
+       <priority>1.0</priority>
+     </url>
+   </urlset>
+3. llms.txt
+   — название компании
+   — описание услуги конкретно, не шаблонно
+   — гео: город, радиус выезда
+   — опыт, цифры
+   — контакт
+4. <head> в index.html:
+<html lang="ru">
+<!-- ВАЖНО: на тестовом домене — noindex, nofollow -->
+   <!-- ПЕРЕД ДЕПЛОЕМ ПРОВЕРИТЬ что стоит index, follow -->
+   <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ваш-домен.ru/">
+<meta property="og:title"       content="">
+   <meta property="og:description" content="">
+   <meta property="og:image" content="https://домен/assets/images/og.webp">
+   <!-- og.webp строго 1200×630px -->
+   <meta property="og:url"  content="https://ваш-домен.ru/">
+   <meta property="og:type" content="business.business">
+<script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+     "name":        "",  ← заполнить
+     "description": "",  ← заполнить
+     "url":         "",  ← заполнить
+     "telephone":   "",  ← заполнить
+     "areaServed":  "",  ← заполнить
+     "address": {
+       "@type": "PostalAddress",
+       "addressLocality": "",  ← заполнить
+       "addressCountry": "RU"
+     }
+   }
+   </script>
+<!-- Яндекс.Метрика — обязательно на каждом лендинге -->
+   <!-- Заменить XXXXXXX на реальный ID счётчика -->
+   <!-- вставить стандартный код счётчика из кабинета Метрики -->
+<!-- VK Pixel — подключать только если трафик идёт из ВКонтакте -->
+   <!-- Заменить XXXXXXX на реальный ID пикселя -->
+   <script>
+     !function(){var t=document.createElement("script");
+     t.type="text/javascript",t.async=!0,
+     t.src="https://vk.com/js/api/openapi.js?169",
+     t.onload=function(){
+       VK.Retargeting.Init("XXXXXXX"),
+       VK.Retargeting.Hit()
+     },
+     document.head.appendChild(t)}();
+   </script>
+ПРИМЕЧАНИЕ ПО VK PIXEL:
+ВКонтакте не передаёт clientId наружу — это ограничение платформы.
+— VK.Retargeting.Hit()         → фиксирует просмотр страницы
+— VK.Retargeting.Event('lead') → фиксирует отправку формы
+Полную атрибуцию по ВК смотреть в рекламном кабинете ВКонтакте.
+В CRM идут только utm_* и маркер активности пикселя — это нормально.
+ПОСЛЕ ДЕПЛОЯ:
+— Добавить сайт в Яндекс.Вебмастер
+— Добавить сайт в Google Search Console
+— Загрузить sitemap.xml в оба вебмастера
+— Проверить валидность sitemap через валидатор
+— Проверить schema.org через validator.schema.org
+— Настроить цель 'form_submit' в Яндекс.Метрике

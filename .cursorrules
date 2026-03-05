@@ -1,0 +1,196 @@
+ДЛЯ ФРОНТЕНД-РАЗРАБОТЧИКА
+ПРАВИЛА ПО ФАЙЛАМ — соблюдать строго:
+Весь HTML — только в index.html, других HTML файлов не создавать.
+Все стили — только в assets/css/style.css, не создавать отдельные CSS файлы.
+Весь JavaScript — только в assets/js/main.js, не создавать отдельные JS файлы.
+Все иконки — только через assets/images/sprite.svg, отдельных SVG файлов не создавать.
+Шрифты — только в assets/fonts/ в формате woff2.
+Серверный код — только send.php в корне, создаёт бэкенд-разработчик, не трогать.
+Никогда не создавать новые папки без явной команды.
+Никогда не создавать новые файлы кроме тех что описаны в структуре.
+Если нужно добавить стиль — дописывать в конец style.css.
+Если нужно добавить JS логику — дописывать в конец main.js.
+ПРАВИЛА ПО КАРТИНКАМ:
+Все картинки — только в формате WebP, максимум 200кб каждая.
+Картинки раскладывать строго по подпапкам:
+assets/images/hero/         ← фото главного экрана
+  assets/images/about/        ← фото о компании, команды
+  assets/images/products/     ← фото карточек товаров
+  assets/images/works/        ← фото примеров работ
+  assets/images/reviews/      ← фото отзывов
+  assets/images/certificates/ ← фото сертификатов и лицензий
+  assets/images/og.webp       ← для соцсетей, всегда в корне images/
+  assets/images/sprite.svg    ← иконки, всегда в корне images/
+В HTML ссылаться на картинки через полный путь с подпапкой:
+  <img src="assets/images/hero/hero-bg.webp" alt="описание">
+  <img src="assets/images/products/product-1.webp" alt="описание">
+  <img src="assets/images/works/work-1.webp" alt="описание">
+Имена файлов — только латиница, строчные буквы, слова через дефис:
+  ✅  hero-bg.webp
+  ✅  product-kession-1.webp
+  ❌  Фото героя.webp
+  ❌  Photo 1.webp
+─────────────────────────────────────────────────────────────
+Структура папок — не менять, не добавлять новые папки без согласования.
+my-landing/
+├── index.html           ← единственный HTML файл. Всё на одной странице.
+├── send.php             ← создаёт бэкенд-разработчик, фронт не трогает
+├── robots.txt           ← не трогать
+├── sitemap.xml          ← не трогать
+├── llms.txt             ← не трогать
+├── .htaccess            ← не трогать
+├── favicon.svg
+├── favicon.ico
+├── apple-touch-icon.png
+│
+└── assets/
+    ├── css/
+    │   └── style.css         ← ОДИН файл стилей
+    ├── js/
+    │   └── main.js           ← ОДИН файл JavaScript
+    ├── images/
+    │   ├── og.webp           ← 1200×630px, для соцсетей
+    │   ├── sprite.svg        ← все иконки в одном файле
+    │   ├── hero/             ← фото главного экрана
+    │   ├── about/            ← фото о компании
+    │   ├── products/         ← фото товаров
+    │   ├── works/            ← фото примеров работ
+    │   ├── reviews/          ← фото отзывов
+    │   └── certificates/     ← фото сертификатов
+    └── fonts/
+        └── inter.woff2       ← только woff2
+ПРАВИЛА ПО КОДУ:
+— Видео НЕ хранить на хостинге. Только embed с YouTube или Vimeo
+— Иконки подключать через sprite.svg:
+  <svg><use href="assets/images/sprite.svg#название-иконки"></use></svg>
+— Итоговый вес страницы: цель до 1Мб
+СТРУКТУРА СЕКЦИЙ в index.html (порядок не менять):
+1. <head>             — мета, og, schema, фавиконы, пиксели, подключение CSS
+2. <header>           — лого, телефон, кнопка CTA
+3. <section#hero>     — главный экран с оффером
+4. <section#benefits> — преимущества
+5. <section#about>    — о компании
+6. <section#quiz>     — квиз или форма заявки
+7. <div#popup>        — попап (скрыт по умолчанию: display:none)
+8. <footer>           — контакты, копирайт
+9. <script>           — подключение main.js последним перед </body>
+ФОРМА — HONEYPOT:
+Добавить скрытое поле в HTML формы, скрывать только через CSS:
+  <input type="text" name="website" class="honeypot">
+В style.css:
+  .honeypot { position: absolute; left: -9999px; }
+КОНСТАНТЫ — заполнять под каждый проект, в начале main.js:
+  const ENDPOINT      = '/send.php';
+  const PAGE_ID       = '';    // заполнить: название лендинга
+  const METRIKA_ID    = null;  // заполнить: реальный ID счётчика Метрики
+  const VK_PIXEL_ID   = null;  // заполнить: ID пикселя ВК если нужен
+СБОР ИСТОЧНИКА ВИЗИТА — вставить в main.js:
+function getSourceData() {
+    const params = new URLSearchParams(window.location.search);
+    const stored = sessionStorage.getItem('source_data');
+if (stored) return JSON.parse(stored);
+const data = {
+      utm_source:   params.get('utm_source')   || '',
+      utm_medium:   params.get('utm_medium')   || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_content:  params.get('utm_content')  || '',
+      utm_term:     params.get('utm_term')     || '',
+yclid:  params.get('yclid')  || '',
+      gclid:  params.get('gclid')  || '',
+      fbclid: params.get('fbclid') || '',
+vk_utm_noredirect: params.get('utm_noredirect') || '',
+referrer: document.referrer || '',
+channel: (function() {
+        if (params.get('utm_source')) return 'utm';
+        if (!document.referrer) return 'direct';
+        const searchEngines = ['yandex', 'google', 'bing', 'mail.ru'];
+        const isSearch = searchEngines.some(se =>
+          document.referrer.includes(se)
+        );
+        return isSearch ? 'organic' : 'referral';
+      })(),
+landing_page: window.location.pathname,
+      landing_url:  window.location.href,
+    };
+sessionStorage.setItem('source_data', JSON.stringify(data));
+    return data;
+  }
+ПОЛУЧЕНИЕ METRIKA CLIENT ID — вставить в main.js:
+function getMetrikaClientId() {
+    return new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(''), 2000);
+if (typeof ym === 'undefined') {
+        clearTimeout(timeout);
+        resolve('');
+        return;
+      }
+ym(METRIKA_ID, 'getClientID', function(clientId) {
+        clearTimeout(timeout);
+        resolve(clientId || '');
+      });
+    });
+  }
+ПОЛУЧЕНИЕ VK PIXEL SESSION — вставить в main.js:
+function getVkUserId() {
+    return new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(''), 2000);
+if (typeof VK === 'undefined' || typeof VK.Retargeting === 'undefined') {
+        clearTimeout(timeout);
+        resolve('');
+        return;
+      }
+VK.Retargeting.Event('lead_form_open');
+      clearTimeout(timeout);
+      resolve('vk_pixel_active');
+    });
+  }
+ОТПРАВКА ФОРМЫ — полный payload, вставить в main.js:
+async function submitForm(name, phone) {
+    const sourceData      = getSourceData();
+    const metrikaClientId = await getMetrikaClientId();
+    const vkPixelSession  = await getVkUserId();
+const payload = {
+      name:  name,
+      phone: phone,
+      page:  PAGE_ID,
+...sourceData,
+metrika_client_id: metrikaClientId,
+vk_utm_noredirect: sourceData.vk_utm_noredirect || '',
+      vk_pixel_session:  vkPixelSession,
+// Коллтрекинг — раскомментировать если подключён
+      // CoMagic:   window.commagic?.getSessionId?.() || ''
+      // Calltouch: window.ct?.getSessionId?.() || ''
+      calltracking_session_id: '',
+website: document.querySelector('.honeypot').value,
+    };
+fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'ok') {
+        if (typeof VK !== 'undefined') {
+          VK.Retargeting.Event('lead');
+        }
+        // Скрыть форму, показать текст благодарности
+      } else {
+        // Показать data.message под формой, разблокировать кнопку
+      }
+    });
+  }
+СОСТОЯНИЯ ФОРМЫ — реализовать все четыре:
+ДО ОТПРАВКИ:
+  — кнопка активна, текст "Отправить заявку"
+В ПРОЦЕССЕ (после нажатия, до ответа сервера):
+  — кнопка disabled
+  — текст кнопки меняется на "Отправляем..."
+УСПЕХ (сервер вернул { "status": "ok" }):
+  — форма скрывается
+  — показывается: "Спасибо! Мы перезвоним в течение 15 минут"
+  — если форма в попапе — попап остаётся открытым с этим текстом
+  — срабатывает VK.Retargeting.Event('lead') если пиксель активен
+ОШИБКА (сервер вернул { "status": "error", "message": "текст" }):
+  — кнопка снова активна
+  — под формой показывается текст из поля message
