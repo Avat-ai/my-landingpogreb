@@ -14,19 +14,23 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-inner" style="position:relative;">
-    <div style="display:flex; flex-direction:row; align-items:center; gap:10px;">
-      <img src="assets/images/logo.png" alt="СК Урал" style="height:44px;">
-      <span style="font-family:'Geologica',sans-serif; font-size:22px; font-weight:800; color:#0D47A1;">Урал</span>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="assets/images/logo.png" alt="СК Урал" class="nav-logo-img">
+      <span class="nav-logo-text">Урал</span>
     </div>
-    <div class="nav-right">
+    <div class="nav-factory-title">Завод эксклюзивных железобетонных изделий</div>
+    <div class="nav-contacts">
       <div class="nav-geo">
         <i data-lucide="map-pin" width="15" height="15"></i>
         Самара и область
       </div>
-      <a class="nav-phone" href="tel:+78001234567">8 800 123-45-67</a>
-      <button class="nav-btn">Получить консультацию</button>
+      <a class="nav-phone" href="tel:+78001234567">
+        <svg class="nav-phone-icon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        8 800 123-45-67
+      </a>
     </div>
+    <button class="nav-btn">Получить консультацию</button>
   </div>
 </nav>
 <!-- HERO -->
@@ -39,8 +43,8 @@
     <div class="hero-left">
       <h1>
         Железобетонный погреб<br>
-        в Самарской области —<br>
-        <em>установим за 2 день</em>
+        <span style="white-space:nowrap">в Самарской области —</span><br>
+        <em>установим за 1 день</em>
       </h1>
 
       <p class="hero-sub">
@@ -50,27 +54,27 @@
 
       <div class="bullets">
         <div class="bullet">
-          <i data-lucide="crane" width="20" height="20"></i>
+          <span class="bullet-check">✓</span>
           <span>Монтаж краном за 1 день</span>
         </div>
         <div class="bullet">
-          <i data-lucide="shield-check" width="20" height="20"></i>
+          <span class="bullet-check">✓</span>
           <span>Гарантия 100 лет</span>
         </div>
         <div class="bullet">
-          <i data-lucide="droplet" width="20" height="20"></i>
+          <span class="bullet-check">✓</span>
           <span>Водонепроницаемый бетон W10</span>
         </div>
         <div class="bullet">
-          <i data-lucide="clock" width="20" height="20"></i>
+          <span class="bullet-check">✓</span>
           <span>Срок службы 100+ лет</span>
         </div>
         <div class="bullet">
-          <i data-lucide="badge-check" width="20" height="20"></i>
+          <span class="bullet-check">✓</span>
           <span>Заводское производство</span>
         </div>
         <div class="bullet">
-          <i data-lucide="wallet" width="20" height="20"></i>
+          <span class="bullet-check">✓</span>
           <span>Погреб в рассрочку</span>
         </div>
       </div>
